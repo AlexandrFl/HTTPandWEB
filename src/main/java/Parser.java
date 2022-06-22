@@ -41,22 +41,22 @@ public class Parser {
                 body = new String(bodyBytes);
             }
         }
-        var prot = requestLine[2];
+        var protocol = requestLine[2];
         if (method.equals("GET")) {
             var pathAndQueryParts = pathAndQuery.split("\\?");
             if (pathAndQueryParts.length == 2) {
                 var path = pathAndQueryParts[0];
                 var query = "?" + pathAndQueryParts[1];
                 var URL = startURL + path + query;
-                return new Request(method, URL, path, query, prot, null);
+                return new Request(method, URL, path, query, protocol, null);
             } else if (pathAndQueryParts.length == 1) {
                 var path = pathAndQueryParts[0];
                 var URL = startURL + path;
-                return new Request(method, URL, path, null, prot, null);
+                return new Request(method, URL, path, null, protocol, null);
             }
         }
         var URL = startURL + pathAndQuery;
-        return new Request(method, URL, pathAndQuery, null, prot, body);
+        return new Request(method, URL, pathAndQuery, null, protocol, body);
     }
 
     private static Optional<String> extractHeader(List<String> headers, String header) {
